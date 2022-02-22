@@ -167,6 +167,7 @@
         select *
         from article
         where article_is_hot = 1
+          and article_is_delete != 1
         order by article_date desc
     </select>
 
