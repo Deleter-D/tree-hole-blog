@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.whpu.wyp.THBlog.mapper.TagMapper">
+    <select id="getAllTag" resultType="Tag">
+        select *
+        from tag
+        where tag_is_delete != 1
+    </select>
+
+    <insert id="addTag" parameterType="Tag">
+        insert into tag(tag_name)
+        values (#{tagName})
+    </insert>
+
+    <update id="deleteTagLogically" parameterType="int">
+        update tag
+        set tag_is_delete = not tag_is_delete
+        where tag_id = #{tagId}
+    </update>
+
+    <update id="updateTagById" parameterType="Tag">
+        update tag
+        set tag_name = #{tagName}
+        where tag_id = #{tagId}
+    </update>
+
+    <select id="getTagLimited" resultType="Tag">
+        select *
+        from tag
+        where tag_is_delete != 1
+        limit #{start}
+            , #{limit}
+    </select>
+
+    <select id="getTheNumOfTag" resultType="int">
+        select count(*)
+        from tag
+        where tag_is_delete != 1
+    </select>
+
+    <select id="getTagById" resultType="Tag">
+        select *
+        from tag
+        where tag_id = #{tagId}
+    </select>
+
+    <select id="getAllDeletedTag" resultType="Tag">
+        select *
+        from tag
+        where tag_is_delete = 1
+    </select>
+
+    <select id="getDeletedTagLimited" resultType="Tag">
+        select *
+        from tag
+        where tag_is_delete = 1
+            limit #{start}
+            , #{limit}
+    </select>
+
+    <select id="getTheNumOfDeletedTag" resultType="int">
+        select count(*)
+        from tag
+        where tag_is_delete = 1
+    </select>
+
+    <delete id="deleteTagById" parameterType="int">
+        delete
+        from tag
+        where tag_id = #{tagId};
+    </delete>
+
+    <delete id="deleteAllDeletedTag">
+        delete
+        from tag
+        where tag_is_delete = 1
+    </delete>
+</mapper>

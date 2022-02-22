@@ -1,0 +1,35 @@
+# database
+spring:
+  datasource:
+    username: root
+    password: wyp2000722
+    url: jdbc:mysql://127.0.0.1:3306/tree_hole_blog
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  # 指定文件上传的路径，但由于手动配置后默认配置会失效，所以需手动配置classpath
+  mvc:
+    static-path-pattern: /**
+  web:
+    resources:
+      static-locations:
+        - classpath:/META-INF/resources/
+        - classpath:/static
+        - classpath:/resources/
+        - file:${upload-path}
+# upload-path是一个自定义的变量
+upload-path: D:\BaiduNetdiskWorkspace\毕设\03_项目\files\
+
+
+# MyBatis
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: edu.whpu.wyp.THBlog.bean
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8081

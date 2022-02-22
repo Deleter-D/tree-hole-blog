@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.whpu.wyp.THBlog.mapper.ArticleMapper">
+
+    <select id="getAllArticle" resultType="Article">
+        select *
+        from article
+        where article_is_delete != 1
+    </select>
+
+    <resultMap id="articleAndTagNameById" type="java.util.HashMap">
+        <id column="article_id" property="articleId"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="article_date" property="articleDate"/>
+        <result column="article_author" property="articleAuthor"/>
+        <result column="article_is_hot" property="articleIsHot"/>
+        <result column="article_is_delete" property="articleIsDelete"/>
+        <result column="article_tag1" property="tag1Id"/>
+        <result column="article_tag2" property="tag2Id"/>
+        <result column="article_tag3" property="tag3Id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="tag1_name" property="tag1Name"/>
+        <result column="tag2_name" property="tag2Name"/>
+        <result column="tag3_name" property="tag3Name"/>
+    </resultMap>
+
+    <select id="getArticleAndTagNameById" resultMap="articleAndTagNameById">
+        select article_id,
+               article_title,
+               article_content,
+               article_date,
+               article_author,
+               article_is_hot,
+               article_is_delete,
+               article_tag1,
+               article_tag2,
+               article_tag3,
+               article_cover,
+               tag1.tag_name as tag1_name,
+               tag2.tag_name as tag2_name,
+               tag3.tag_name as tag3_name,
+               case
+                   when article_tag1 = null then tag1.tag_name = ''
+                   when article_tag2 = null then tag2.tag_name = ''
+                   when article_tag3 = null then tag3.tag_name = ''
+                   end
+        from article
+                 left outer join tag tag1 on article_tag1 = tag1.tag_id
+                 left outer join tag tag2 on article_tag2 = tag2.tag_id
+                 left outer join tag tag3 on article_tag3 = tag3.tag_id
+        where (article_tag1 = tag1.tag_id or article_tag1 is null)
+          and (article_tag2 = tag2.tag_id or article_tag2 is null)
+          and (article_tag3 = tag3.tag_id or article_tag3 is null)
+          and (article_id = #{articleId})
+    </select>
+
+    <select id="getArticleById" resultType="Article">
+        select *
+        from article
+        where article_id = #{articleId}
+    </select>
+
+    <insert id="addArticle" parameterType="Article">
+        insert into article(article_title, article_content, article_date, article_author, article_cover
+        <if test="articleTag1 != null">
+            , article_tag1
+        </if>
+        <if test="articleTag2 != null">
+            , article_tag2
+        </if>
+        <if test="articleTag3 != null">
+            , article_tag3
+        </if>
+        )
+        values (#{articleTitle}, #{articleContent}, #{articleDate}, #{articleAuthor}, #{articleCover}
+        <if test="articleTag1 != null">
+            , #{articleTag1}
+        </if>
+        <if test="articleTag2 != null">
+            , #{articleTag2}
+        </if>
+        <if test="articleTag3 != null">
+            , #{articleTag3}
+        </if>
+        )
+    </insert>
+
+    <select id="getArticleLimited" resultType="Article">
+        select *
+        from article
+        where article_is_delete != 1
+        order by article_date desc
+            limit #{start}
+               , #{limit}
+    </select>
+
+    <select id="getTheNumOfArticle" resultType="int">
+        select count(*)
+        from article
+        where article_is_delete != 1
+    </select>
+
+    <delete id="deleteArticleById" parameterType="int">
+        delete
+        from article
+        where article_id = #{aritcleId};
+    </delete>
+
+    <update id="updateArticleById" parameterType="Article">
+        update article
+        set article_title=#{articleTitle},
+        article_author=#{articleAuthor},
+        article_content=#{articleContent}
+        <if test="articleTag1 != null">
+            ,article_tag1=#{articleTag1}
+        </if>
+        <if test="articleTag1 != null">
+            ,article_tag2=#{articleTag2}
+        </if>
+        <if test="articleTag1 != null">
+            ,article_tag3=#{articleTag3}
+        </if>
+        where article_id = #{articleId}
+    </update>
+
+    <update id="updateHotStatement" parameterType="int">
+        update article
+        set article_is_hot = not article_is_hot
+        where article_id = #{articleId}
+    </update>
+
+    <update id="deleteArticleLogically" parameterType="int">
+        update article
+        set article_is_delete = not article_is_delete
+        where article_id = #{articleId}
+    </update>
+
+    <select id="getAllDeletedArticle" resultType="Article">
+        select *
+        from article
+        where article_is_delete = 1
+    </select>
+
+    <select id="getDeletedArticleLimited" resultType="Article">
+        select *
+        from article
+        where article_is_delete = 1
+        order by article_date desc
+            limit #{start}
+               , #{limit}
+    </select>
+
+    <select id="getTheNumOfDeletedArticle" resultType="int">
+        select count(*)
+        from article
+        where article_is_delete = 1
+    </select>
+
+    <delete id="deleteAllDeletedArticle">
+        delete
+        from article
+        where article_is_delete = 1
+    </delete>
+
+    <select id="getAllRecommendArticle" resultType="Article">
+        select *
+        from article
+        where article_is_hot = 1
+        order by article_date desc
+    </select>
+
+    <resultMap id="articleAndTagName" type="java.util.HashMap">
+        <id column="article_id" property="articleId"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_tag1" property="tag1Id"/>
+        <result column="article_tag2" property="tag2Id"/>
+        <result column="article_tag3" property="tag3Id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="tag1_name" property="tag1Name"/>
+        <result column="tag2_name" property="tag2Name"/>
+        <result column="tag3_name" property="tag3Name"/>
+    </resultMap>
+
+    <select id="getArticleAndTagName" resultMap="articleAndTagName">
+        select article_id,
+               article_title,
+               article_tag1,
+               article_tag2,
+               article_tag3,
+               article_cover,
+               tag1.tag_name as tag1_name,
+               tag2.tag_name as tag2_name,
+               tag3.tag_name as tag3_name,
+               case
+                   when article_tag1 = null then tag1.tag_name = ''
+                   when article_tag2 = null then tag2.tag_name = ''
+                   when article_tag3 = null then tag3.tag_name = ''
+                   end
+        from article
+                 left outer join tag tag1 on article_tag1 = tag1.tag_id
+                 left outer join tag tag2 on article_tag2 = tag2.tag_id
+                 left outer join tag tag3 on article_tag3 = tag3.tag_id
+        where (article_tag1 = tag1.tag_id or article_tag1 is null)
+          and (article_tag2 = tag2.tag_id or article_tag2 is null)
+          and (article_tag3 = tag3.tag_id or article_tag3 is null)
+          and article_is_delete != 1
+        order by article_date desc
+            limit #{start}
+               , #{limit}
+    </select>
+
+    <select id="getTheNumOfHotArticle" resultType="int">
+        select COUNT(*)
+        from article
+        where article_is_delete != 1 and article_is_hot = 1
+    </select>
+
+    <select id="getTheArticleAfterClassification" resultMap="articleAndTagName">
+        select article_id,
+               article_title,
+               article_tag1,
+               article_tag2,
+               article_tag3,
+               article_cover,
+               tag1.tag_name as tag1_name,
+               tag2.tag_name as tag2_name,
+               tag3.tag_name as tag3_name,
+               case
+                   when article_tag1 = null then tag1.tag_name = ''
+                   when article_tag2 = null then tag2.tag_name = ''
+                   when article_tag3 = null then tag3.tag_name = ''
+                   end
+        from article
+                 left outer join tag tag1 on article_tag1 = tag1.tag_id
+                 left outer join tag tag2 on article_tag2 = tag2.tag_id
+                 left outer join tag tag3 on article_tag3 = tag3.tag_id
+        where (article_tag1 = tag1.tag_id or article_tag1 is null)
+          and (article_tag2 = tag2.tag_id or article_tag2 is null)
+          and (article_tag3 = tag3.tag_id or article_tag3 is null)
+          and (article_tag1 = #{tagId} or article_tag2 = #{tagId} or article_tag3 = #{tagId})
+          and article_is_delete != 1
+        order by article_date desc
+            limit #{start}
+               , #{limit}
+    </select>
+
+    <select id="getTheNumOfArticleAfterClassification" resultType="int">
+        select COUNT(*)
+        from article
+        where (article_tag1 = #{tagId} or article_tag2 = #{tagId} or article_tag3 = #{tagId})
+          and article_is_delete != 1
+    </select>
+
+    <select id="getMaxId" resultType="int">
+        select max(article_id)
+        from article
+    </select>
+
+    <update id="updateCover">
+        update article
+        set article_cover = #{articleCover}
+        where article_id = #{articleId}
+    </update>
+
+</mapper>
