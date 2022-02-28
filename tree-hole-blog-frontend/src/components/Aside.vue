@@ -15,7 +15,7 @@
     <div>
       <AsideTag :tags="tags" :loading="loading"></AsideTag>
     </div>
-    <el-button @click="test" type="danger">登录后台</el-button>
+<!--    <el-button @click="test" type="danger">登录后台</el-button>-->
   </div>
 </template>
 

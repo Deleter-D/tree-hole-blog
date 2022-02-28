@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -37,8 +39,19 @@ public class FileUploadController {
             if (!file1.exists()) {
                 file1.mkdir();
             }
+
+            // 提取文件格式
             String fileName = file.getOriginalFilename();
-            File dest = new File(filePath + "\\" + fileName);
+            String format = "";
+            StringTokenizer stringTokenizer = new StringTokenizer(fileName, ".");
+            while (stringTokenizer.hasMoreTokens()) {
+                format = stringTokenizer.nextToken();
+            }
+            System.out.println(format);
+
+            // 设置UUID防止文件名重复
+            String fileUUID = UUID.randomUUID().toString().replace("-", "");
+            File dest = new File(filePath + "\\" + fileUUID + "." + format);
             try {
                 file.transferTo(dest);
                 fileRespond.setMsg("Uploaded successfully");
@@ -46,7 +59,7 @@ public class FileUploadController {
                 String fileUrl = request.getScheme() + "://"
                         + request.getServerName() + ":"
                         + request.getServerPort()
-                        + "/" + fileName;
+                        + "/" + fileUUID + "." + format;
                 fileRespond.setURL(fileUrl);
             } catch (IOException e) {
                 System.out.println(e);
