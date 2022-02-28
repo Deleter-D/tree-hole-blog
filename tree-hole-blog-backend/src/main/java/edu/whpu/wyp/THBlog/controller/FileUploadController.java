@@ -99,7 +99,4 @@ public class FileUploadController {
 
         return fileRespond;
     }
-
-    /*
-    * test*/
 }
