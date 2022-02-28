@@ -20,7 +20,7 @@ spring:
         - classpath:/resources/
         - file:${upload-path}
 # upload-path是一个自定义的变量
-upload-path: D:\StudyAndWork\GitRepository\tree-hole-blog\files
+upload-path: D:\StudyAndWork\GitRepository\tree-hole-blog\files\uploads
 
 
 # MyBatis
