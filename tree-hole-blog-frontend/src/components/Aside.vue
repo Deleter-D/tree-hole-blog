@@ -5,7 +5,7 @@
       <el-image style="height: 50%;width: 50%"
                 fit="cover"
                 :src="this.$store.state.imagesBaseUrl
-                      +'/images/touxiang.jpg'"></el-image>
+                      +'images/touxiang.jpg'"></el-image>
     </div>
     <br>
     <div>

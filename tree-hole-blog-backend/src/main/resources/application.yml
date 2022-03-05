@@ -18,9 +18,9 @@ spring:
         - classpath:/META-INF/resources/
         - classpath:/static
         - classpath:/resources/
-        - file:${upload-path}
+        - file:D:\StudyAndWork\GitRepository\tree-hole-blog\files\
 # upload-path是一个自定义的变量
-upload-path: D:\StudyAndWork\GitRepository\tree-hole-blog\files\uploads
+upload-path: D:\StudyAndWork\GitRepository\tree-hole-blog\files\uploads\
 
 
 # MyBatis

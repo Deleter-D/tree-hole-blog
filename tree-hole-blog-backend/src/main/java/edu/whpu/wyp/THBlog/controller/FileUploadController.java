@@ -51,7 +51,7 @@ public class FileUploadController {
 
             // 设置UUID防止文件名重复
             String fileUUID = UUID.randomUUID().toString().replace("-", "");
-            File dest = new File(filePath + "\\" + fileUUID + "." + format);
+            File dest = new File(filePath + fileUUID + "." + format);
             try {
                 file.transferTo(dest);
                 fileRespond.setMsg("Uploaded successfully");
@@ -59,7 +59,7 @@ public class FileUploadController {
                 String fileUrl = request.getScheme() + "://"
                         + request.getServerName() + ":"
                         + request.getServerPort()
-                        + "/" + fileUUID + "." + format;
+                        + "/uploads/" + fileUUID + "." + format;
                 fileRespond.setURL(fileUrl);
             } catch (IOException e) {
                 System.out.println(e);

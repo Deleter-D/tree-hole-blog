@@ -8,27 +8,27 @@
           <el-carousel-item>
             <el-image fit="cover"
                       :src="this.$store.state.imagesBaseUrl
-                      +'/images/carousel/carousel1.png'"></el-image>
+                      +'images/carousel/carousel1.png'"></el-image>
           </el-carousel-item>
           <el-carousel-item>
             <el-image fit="cover"
                       :src="this.$store.state.imagesBaseUrl
-                      +'/images/carousel/carousel2.png'"></el-image>
+                      +'images/carousel/carousel2.png'"></el-image>
           </el-carousel-item>
           <el-carousel-item>
             <el-image fit="cover"
                       :src="this.$store.state.imagesBaseUrl
-                      +'/images/carousel/carousel3.png'"></el-image>
+                      +'images/carousel/carousel3.png'"></el-image>
           </el-carousel-item>
           <el-carousel-item>
             <el-image fit="cover"
                       :src="this.$store.state.imagesBaseUrl
-                      +'/images/carousel/carousel5.png'"></el-image>
+                      +'images/carousel/carousel5.png'"></el-image>
           </el-carousel-item>
           <el-carousel-item>
             <el-image fit="cover"
                       :src="this.$store.state.imagesBaseUrl
-                      +'/images/carousel/carousel4.png'"></el-image>
+                      +'images/carousel/carousel4.png'"></el-image>
           </el-carousel-item>
         </el-carousel>
       </el-card>
