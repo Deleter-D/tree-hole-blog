@@ -26,8 +26,8 @@
         </div>
       </el-col>
       <el-col :span="6">
-        <WeeklyTopic></WeeklyTopic>
-        <br>
+        <!--        <WeeklyTopic></WeeklyTopic>-->
+        <!--        <br>-->
         <div class="form">
           <el-card class="card">
             <h3>发表留言</h3>
@@ -82,7 +82,7 @@ import { ElMessage } from 'element-plus/lib/components';
 import CommentPlate from '../components/CommentPlate';
 import { get, post } from '../axiosUtils/axios_instance';
 // eslint-disable-next-line import/extensions
-import WeeklyTopic from '../components/WeeklyTopic';
+// import WeeklyTopic from '../components/WeeklyTopic';
 // eslint-disable-next-line import/extensions
 import CommentPlateLoading from '../components/CommentPlateLoading';
 
@@ -90,7 +90,7 @@ export default {
   name: 'Comment',
   components: {
     CommentPlateLoading,
-    WeeklyTopic,
+    // WeeklyTopic,
     CommentPlate,
   },
   data() {
@@ -108,6 +108,20 @@ export default {
       this.commentContent = '';
     },
     submit() {
+      if (this.commentName === '' || this.commentContent === '') {
+        if (this.commentName === '') {
+          ElMessage({
+            message: '请输入昵称',
+            type: 'warning',
+          });
+        } else {
+          ElMessage({
+            message: '请输入留言内容',
+            type: 'warning',
+          });
+        }
+        return;
+      }
       const date = new Date();
       post('comment', {
         commentName: this.commentName,
