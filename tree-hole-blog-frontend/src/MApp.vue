@@ -14,7 +14,9 @@ export default {
 .mobile {
   width: 100vw;
   min-height: 100vh;
-  background-image: url("assets/background.jpg");
-  background-attachment: fixed;
+  /*background-image: url("assets/background.jpg");*/
+  /*background-attachment: fixed;*/
+  background: url("assets/mbackground.png") no-repeat center center;
+  background-size: 100% 100%;
 }
 </style>

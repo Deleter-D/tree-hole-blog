@@ -4,7 +4,7 @@
     <el-card class="card"
              style="text-align: center"
              shadow="hover">
-      <el-carousel height="40vw">
+      <el-carousel height="24vh">
         <el-carousel-item>
           <el-image fit="fill"
                     :src="this.$store.state.imagesBaseUrl

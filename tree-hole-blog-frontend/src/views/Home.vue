@@ -4,9 +4,9 @@
     <div>
       <el-card style="text-align: center;background-color: rgba(255,255,255,0.2)"
                shadow="hover" :body-style="{ padding: '0px' }">
-        <el-carousel type="card" height="20vw">
+        <el-carousel height="80vh">
           <el-carousel-item>
-            <el-image fit="cover"
+            <el-image fit="fill"
                       :src="this.$store.state.imagesBaseUrl
                       +'images/carousel/carousel1.png'"></el-image>
           </el-carousel-item>

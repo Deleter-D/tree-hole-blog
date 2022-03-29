@@ -3,7 +3,26 @@
     <el-row>
       <el-col :span="8">
         <ManagementHomeCard title="快捷方式">
-          <span></span>
+          <el-row>
+            <el-col :span="12">
+              <el-card @click="goToAddArticle" shadow="hover" class="card">
+                <div style="text-align: center">
+                  <span class="fontStyle">添加</span>
+                  <br>
+                  <span class="fontStyle">文章</span>
+                </div>
+              </el-card>
+            </el-col>
+            <el-col :span="12">
+              <el-card @click="goToArticleList" shadow="hover" class="card">
+                <div style="text-align: center">
+                  <span class="fontStyle">文章</span>
+                  <br>
+                  <span class="fontStyle">列表</span>
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
         </ManagementHomeCard>
       </el-col>
       <el-col :span="8">
@@ -78,7 +97,7 @@
                   gitHub
                 </div>
               </template>
-              url
+              <a href="https://github.com/Deleter-D/tree-hole-blog">点击跳转</a>
             </el-descriptions-item>
           </el-descriptions>
         </ManagementHomeCard>
@@ -106,6 +125,14 @@ export default {
       theNumOfTag: 0,
       theNumOfComment: 0,
     };
+  },
+  methods: {
+    goToAddArticle() {
+      this.$router.push('/management/add');
+    },
+    goToArticleList() {
+      this.$router.push('/management/list');
+    },
   },
   mounted() {
     get('theNumOfArticle')
