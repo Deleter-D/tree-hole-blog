@@ -20,6 +20,8 @@ public interface CommentService {
 
     List<Comment> getAllCommentLimited(int currentPage, int size);
 
+    List<Comment> getAllPassedCommentLimited(int currentPage, int size);
+
     List<Comment> getAllDeletedCommentLimited(int currentPage, int size);
 
     int getTheNumOfDeletedComment();

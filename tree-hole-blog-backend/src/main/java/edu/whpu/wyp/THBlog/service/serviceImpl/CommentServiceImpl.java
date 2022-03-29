@@ -50,6 +50,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<Comment> getAllPassedCommentLimited(int currentPage, int size) {
+        int start = (currentPage - 1) * size;
+        return commentMapper.getAllPassedCommentLimited(start, size);
+    }
+
+    @Override
     public List<Comment> getAllDeletedCommentLimited(int currentPage, int size) {
         int start = (currentPage - 1) * size;
         return commentMapper.getAllDeletedCommentLimited(start, size);

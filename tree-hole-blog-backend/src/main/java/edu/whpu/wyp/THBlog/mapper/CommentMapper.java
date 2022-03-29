@@ -22,6 +22,8 @@ public interface CommentMapper {
 
     List<Comment> getAllCommentLimited(int start, int limit);
 
+    List<Comment> getAllPassedCommentLimited(int start, int limit);
+
     List<Comment> getAllDeletedCommentLimited(int start, int limit);
 
     int getTheNumOfDeletedComment();

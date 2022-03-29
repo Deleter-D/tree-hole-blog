@@ -151,7 +151,7 @@ export default {
     },
   },
   mounted() {
-    get('commentLimited', {
+    get('commentPassedLimited', {
       params: {
         currentPage: 1,
         size: 10,

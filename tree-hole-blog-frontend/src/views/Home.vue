@@ -42,7 +42,7 @@
         <el-col :span="6">
           <NewestComment></NewestComment>
           <br>
-          <Link></Link>
+<!--          <Link></Link>-->
         </el-col>
       </el-row>
     </div>
@@ -54,7 +54,7 @@
 // eslint-disable-next-line import/extensions
 import RecommendArticle from '../components/RecommendArticle';
 // eslint-disable-next-line import/extensions
-import Link from '../components/Link';
+// import Link from '../components/Link';
 // eslint-disable-next-line import/extensions
 import NewestComment from '../components/NewestComment';
 
@@ -62,7 +62,7 @@ export default {
   name: 'Home',
   components: {
     NewestComment,
-    Link,
+    // Link,
     RecommendArticle,
   },
   data() {

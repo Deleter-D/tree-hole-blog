@@ -80,6 +80,11 @@ public class CommentController {
         return commentService.getAllCommentLimited(Integer.parseInt(currentPage), Integer.parseInt(size));
     }
 
+    @GetMapping("/commentPassedLimited")
+    public List<Comment> getAllPassedCommentLimited(String currentPage, String size) {
+        return commentService.getAllPassedCommentLimited(Integer.parseInt(currentPage), Integer.parseInt(size));
+    }
+
     @GetMapping("/commentDeletedLimited")
     public List<Comment> getAllDeletedCommentLimited(String currentPage, String size) {
         return commentService.getAllDeletedCommentLimited(Integer.parseInt(currentPage), Integer.parseInt(size));
