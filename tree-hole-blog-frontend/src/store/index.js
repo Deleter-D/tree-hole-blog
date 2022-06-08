@@ -12,7 +12,7 @@ export default createStore({
     articleTag2: null,
     articleTag3: null,
     articleLastCurrentPage: 1,
-    imagesBaseUrl: 'http://192.168.0.105:8081/',
+    imagesBaseUrl: 'http://localhost:8081/',
   },
   mutations: {
     setMsg(state, payload) {

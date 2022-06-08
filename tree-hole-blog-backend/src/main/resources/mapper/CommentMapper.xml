@@ -86,7 +86,7 @@
     <select id="getNewestComment" resultType="Comment">
         select *
         from comment
-        where comment_is_pass = 1
+        where comment_is_pass = 1 and comment_is_delete != 1
         order by comment_date desc limit 5
     </select>
 </mapper>
